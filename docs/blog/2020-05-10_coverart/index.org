@@ -1,0 +1,184 @@
+#+OPTIONS: toc:nil html-style:nil num:nil html5-fancy:1 html-postamble:nil
+
+* Downloading music coverart
+
+#+ATTR_HTML: :class meta
+10 May 2020
+
+Cover art has always been an important part of music. It is the way
+physical media is separated and recognized. Erven in today's digital
+world releases maintain a vast aesthetic and artistic connection to
+their cover art. From streaming apps to online web stores music is
+"visualized" using cover art.
+
+In this article we will look at the implementation of a small library
+of mine written in Racket and discuss the differences between the
+various APIs used.
+
+The APIs currently used are provided by [[https://www.apple.com/itunes/][iTunes]], [[https://www.last.fm/][Last.fm]], [[https://www.deezer.com/][deezer]] and
+the Internet Archive - MusicBrainz collaboration service: [[https://coverartarchive.org/][Cover Art Archive]].
+
+[[https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/][iTunes Search API]] - This API returns 2 cover art URLs (sized 60x60 and
+100x100). We can edit the URLs and get a cover art of any arbitrary
+size. There are also arguments for specifying the number of results
+needed and the explicitness of the results. This is a very powerful
+API and can be used for any kind of medium available in the iTunes
+store.
+
+The library is using the following settings:
+~?term={TERM}&limit={LIMIT}&explicit={EXPLICIT}&media=music&entity=album~
+and provides the following functions:
+
+#+BEGIN_SRC scheme
+  (define (coverart:itunes term
+                           #:size [size 100]
+                           #:limit [limit 1]
+                           #:explicit [explicit #t]) ...)
+#+END_SRC
+
+This function searches iTunes for music albums and returns a list of URLs.
+
+#+BEGIN_SRC scheme
+  (define (coverart:itunes:simple artist
+                                  release
+                                  #:size [size 100]
+                                  #:limit [limit 1]
+                                  #:explicit [explicit #t]) ...)
+#+END_SRC
+
+This one is a wrapper function. It calls coverart:itunes with a
+properly formatted `term' based on the `artist' and `release'
+arguments.
+
+[[https://www.last.fm/api/][Last.fm API]] - This API requires an *API Key* in order to respond. For
+the library's purposes the [[https://www.last.fm/api/show/album.getInfo][album.getInfo]] method is used. The URLs
+returned can have either of the following size field formats: /Ys/ or
+/YxY/ where Y is the resolution of the image. Editing the URL to
+request a specific resolution results in an image whose resolution is
+>= Y. Using the format /YxY/ usually produces a wider range of
+results. Only one result is returned.
+
+The following function is provided by the library and returns a string:
+
+#+BEGIN_SRC scheme
+  (define (coverart:lastfm artist
+                           release
+                           #:size [size 300]
+                           #:autocorrect [autocorrect #t]) ...)
+#+END_SRC
+
+[[https://developers.deezer.com/api][deezer API]] - [You need to login to view the documentation] - Does NOT
+need an API key to use - This API returns 4 covert art URLs. The sizes
+are 56x56, 250x250, 500x500, 1000x1000. This service also allows
+editing the URL to get an image of any arbitrary resolution. Multiple
+results are returned and the number of results can be configured.
+
+Here is the API URL used by the library:
+~http://api.deezer.com/search/album?q={QUERY}&nb_items={LIMIT}&output=json~. Where
+~{QUERY}~ is the term you want to search for and ~{LIMIT}~ is the
+number of results you want returned.
+
+The two functions provided by the library are:
+
+#+BEGIN_SRC scheme
+  (define (coverart:deezer query
+                           #:size [size 1000]
+                           #:limit [limit 1]) ...)
+#+END_SRC
+
+This function searches deezer for cover art URLs and returns a list of them.
+
+#+BEGIN_SRC scheme
+  (define (coverart:deezer:simple artist
+                                  release
+                                  #:size [size 1000]
+                                  #:limit [limit 1]) ...)
+#+END_SRC
+
+This is a wrapper function that calls coverart:deezer with the `query'
+argument formatted using the `artist' and `release'.
+
+[[https://wiki.musicbrainz.org/Cover_Art_Archive/API][Cover Art Archive API]] - This is a very interesting service. It can
+return both the front and rear side of a medium's cover art and any
+accompanying booklets. There is one original image (of variable
+resolution) and three thumbnails (sized 250px, 500px and 1200px)
+available. The API requires a MusicBrainz ID to find and return a
+release's cover art.
+
+This library provides three functions. One for searching MusicBrainz
+and getting an ID, one for searching Cover Art Archive and returning
+images and one that combines the previous two.
+
+#+BEGIN_SRC scheme
+  (define (musicbrainz:get-mbid query
+                                #:group-limit [group-limit 1]
+                                #:rel-limit [rel-limit 1])
+#+END_SRC
+
+This function searches MusicBrainz for IDs related to the `query'
+provided. The API organizes IDs in release groups. Each release group
+refers to a different album/EP/etc. Each group can have multiple
+releases. Each release has its own mbid. `#:group-limit' allows you to
+specify the maximum amount of release groups to return. `#:rel-limit'
+specifies the maximum number of releases included per release
+group. The function returns a list of lists of strings. The returned
+list contains one list for every release group. Each release group
+list contains strings of mbids to specific releases.
+
+#+BEGIN_SRC scheme
+  (define (coverartarchive:get-cover-url mbid
+                                         #:type [type 'front]
+                                         #:thumb [thumb #f])
+#+END_SRC
+
+Returns a list of cover art image URLs. `#:type' can be 'front to get
+the front part of the cover art, 'back to get the rear part, 'medium
+to get an image of the medium itself, 'booklet for images of the
+booklet included with the release or 'all to get all the images
+returned by the response. If `#:thumb' is specified with '|250|,
+'|500| or '|1200| a thumbnail is returned instead of the original
+image.
+
+#+BEGIN_SRC scheme
+  (define (coverart:coverartarchive artist
+                                    release
+                                    #:group-limit [group-limit 1]
+                                    #:rel-limit [rel-limit 1]
+                                    #:type [type 'front]
+                                    #:thumb [thumb #f])
+#+END_SRC
+
+This function first calls musicbrainz:get-mbid using the `artist' and
+`release' arguments, then for every mbid returned
+coverartarchive:get-cover-url is called to get a list of URLs. It
+returns a list of lists of lists of strings. The returned list
+contains one list for every release group. Each release group list
+contains one list for every mbid. Each mbid list contains the image
+URLs related to that mbid.
+
+#+HTML: <br>
+
+In addition to those API specific functions, an additional function is
+provided to search all of the above APIs and return thumbnails to the
+cover art requested:
+
+#+BEGIN_SRC scheme
+  (define (coverart:search-thumb artist
+                                 album
+                                 #:size [size 500]
+                                 #:fallback [fallback ""])
+#+END_SRC
+
+The function will call the APIs in this order: iTunes, deezer,
+Last.fm, Cover Art Archive. The ordering is based on a service's
+ability to resize the covers. For Cover Art Archive the `#:size'
+argument is ignored and a fixed width of 500px will always be returned
+(Possible future improvement). The value of the `#:fallback' argument
+is returned if none of the services produce a result. If a result is
+found the function returns a string.
+
+#+HTML: <hr>
+
+Download the code [Racket]: [[https://hyperimpose.org/blog/2020-05-10_coverart/coverart.rkt][coverart.rkt]]
+
+License: BSD 3-Clause

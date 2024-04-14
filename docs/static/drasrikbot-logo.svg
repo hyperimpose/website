@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="342.39999"
+   height="67.300003"
+   viewBox="0 0 90.593331 17.806459"
+   version="1.1"
+   id="svg13712"
+   sodipodi:docname="drasrikbot-logo.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview13714"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2.1425335"
+     inkscape:cx="169.89232"
+     inkscape:cy="-82.612475"
+     inkscape:window-width="1920"
+     inkscape:window-height="1048"
+     inkscape:window-x="0"
+     inkscape:window-y="16"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="text13882" />
+  <defs
+     id="defs13709">
+    <rect
+       x="7.0652676"
+       y="17.515833"
+       width="462.85471"
+       height="133.63155"
+       id="rect596" />
+    <rect
+       x="10.062765"
+       y="13.645736"
+       width="484.46494"
+       height="181.15375"
+       id="rect13884" />
+    <rect
+       x="10.147863"
+       y="8.7227097"
+       width="481.09372"
+       height="184.38072"
+       id="rect13770" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text13768"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;font-family:Comfortaa;-inkscape-font-specification:Comfortaa;text-align:justify;white-space:pre;shape-inside:url(#rect13770);display:inline;opacity:0.87;fill:#000000;fill-opacity:0.31;stroke-width:0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;font-family:Comfortaa;-inkscape-font-specification:Comfortaa;text-align:justify;opacity:0.87;fill:#000000;fill-opacity:0.31;stroke-width:0"
+       x="11.842669"
+       y="17.676517"
+       id="text13880"><tspan
+         sodipodi:role="line"
+         id="tspan13878"
+         style="stroke-width:0"
+         x="11.842669"
+         y="17.676517" /></text>
+    <g
+       aria-label="drastikbot"
+       transform="scale(0.26458333)"
+       id="text13882"
+       style="font-size:85.3333px;font-family:Comfortaa;-inkscape-font-specification:Comfortaa;text-align:justify;letter-spacing:-9.5px;word-spacing:0px;white-space:pre;shape-inside:url(#rect13884);opacity:0.87;stroke-width:0">
+      <text
+         xml:space="preserve"
+         id="text594"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;font-family:Comfortaa;-inkscape-font-specification:Comfortaa;letter-spacing:-11.95px;white-space:pre;shape-inside:url(#rect596);display:inline;fill:#ffbc22;fill-opacity:1;stroke-width:1.121"
+         transform="translate(-12.184451,-28.961767)"><tspan
+           x="7.0644531"
+           y="95.607072"
+           id="tspan2591"><tspan
+             style="font-weight:300;-inkscape-font-specification:'Comfortaa Light';fill:#050000"
+             id="tspan2587">drastik</tspan><tspan
+             style="fill:#050000"
+             id="tspan2589">bot</tspan></tspan></text>
+    </g>
+  </g>
+</svg>
