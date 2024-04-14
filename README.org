@@ -1,0 +1,28 @@
+#+OPTIONS: ^:nil
+
+* hyperimpose.org website
+
+This repository contains the website generator and content for https://hyperimpose.org
+
+** Generator
+
+The website is built using a custom generator based on Jinja2 templates and org-mode html exported files.
+The generator is written in Python 3.
+
+To run the generator and build the website, clone this repository and then from the root directory of the
+project run the following commands:
+#+BEGIN_SRC sh
+  python -m venv venv
+  source venv/bin/activate
+  pip install -r requirements.txt
+  python generator
+#+END_SRC
+
+** Content
+
+The content of the website is saved in the [[./docs][docs/]] directory and served with Github Pages.
+
+** License
+
+- The content is licensed under the [[https://creativecommons.org/licenses/by-nd/4.0/][Creative Commons Attribution-NoDerivatives 4.0 International]] license.
+- The generator is licensed under the [[https://spdx.org/licenses/BSD-3-Clause.html][BSD 3-Clause “New” or “Revised” License]].
