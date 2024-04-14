@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% block head %}
+            <meta charset="UTF-8">
+            <title>{% block title %}hyperimpose{% endblock %}</title>
+            <meta name=viewport content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="/static/layout.css" />
+        {% endblock %}
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <div class="nav-container">
+                    <a class="logo" href="http://hyperimpose.org"></a>
+                    <div class="menu_links">
+                        <a href="/blog">[blog]</a>
+                    </div>
+                </div>
+            </nav>
+
+            {% if breadcrumbs %}
+                <div class="breadcrumbs">
+                    <span>
+                        {% for link, title in breadcrumbs %}
+                            {% if not loop.last %}
+                                <a href="{{ link }}">{{ title }}</a>
+                                /
+                            {% else %}
+                                {{ title }}
+                            {% endif %}
+                        {%  endfor %}
+                    </span>
+                </div>
+            {% endif %}
+        </header>
+
+        <main>
+            {% block main %}
+                <article id="content">{% block content %}{% endblock %}</article>
+            {% endblock %}
+        </main>
+
+        <footer>
+            <div class="copyright">
+                <p>Copyright © 2024 <a href="http://hyperimpose.org">hyperimpose.org</a>.&nbsp</p>
+                <p> Licensed under <a href="https://creativecommons.org/licenses/by-nd/4.0/">CC BY-ND 4.0</a>.</p>
+            </div>
+            <p>
+                <a href="https://github.com/hyperimpose">[github]</a>
+                &nbsp
+                <a href="mailto:hyperimpose@protonmail.com">[email]</a>
+            </p>
+        </footer>
+
+    </body>
+</html>

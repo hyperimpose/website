@@ -1,0 +1,34 @@
+{% extends "layout.jinja" %}
+{% block head %}
+    {{ super() }}
+    <style>
+     p {
+         color: rgba(255, 255, 255, 0.6);
+     }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h2>irc_client</h2>
+    <p class="meta">Erlang / AGPLv3 / <a href="https://github.com/hyperimpose/irc">[View]</a></p>
+    <p>IRC client library. The project aims to abstract the IRC protocol completely and
+        provide easy access to the state of the connection. It can be used to implement
+        any kind of service.</p>
+
+    <h2>minutia</h2>
+    <p class="meta">Erlang / Python / AGPLv3 / <a href="https://github.com/hyperimpose/minutia">[View]</a></p>
+    <p>minutia summurizes the content of various internet services. This summury
+        can be a title, a filesize, the resolution of an image etc.</p>
+
+    <h2>miscellany</h2>
+    <p class="meta">Erlang / Multiple licenses / <a href="https://github.com/hyperimpose/miscellany">[View]</a></p>
+    <p>A collection of programming libraries and tools used by various hyperimpose projects.</p>
+
+    <h2>drastikbot 2</h2>
+    <p class="meta">DEAD / Python / AGPLv3 / <a href="https://github.com/olagood/drastikbot">[View]</a></p>
+    <p>Developement has ceased. Consider using another IRC bot.</p>
+    <p>drastikbot 2 is an IRC bot that makes it easy to add new features thanks to its modular
+        design. Version 2.2 offers a new module API and is not backwards compatible with
+        previous drastikbot versions.</p>
+{% endblock %}

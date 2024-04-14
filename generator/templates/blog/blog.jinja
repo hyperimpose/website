@@ -1,0 +1,22 @@
+{% extends "layout.jinja" %}
+{% block title %}blog - {{ super() }}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/blog.css"/>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>blog</h2>
+        <p class="meta">[RSS - ToDo]</p>
+        <p style="color: rgba(255, 255, 255, 0.6)"><b>Blog (noun)</b>:
+            <i>a website where an individual person, or people representing an organization, write
+                regularly about recent events or topics that interest them, usually with photos and
+                links to other websites that they find interesting.</i></p>
+        <p style="color: rgba(255, 255, 255, 0.6)">- Oxford Advanced Learner's Dictionary</p>
+        <h3>Articles</h3>
+        {% for article in articles | sort(attribute="date", reverse = True) %}
+            <p><a href="{{ article.link }}">{{ article.date }}</a> - {{ article.title }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

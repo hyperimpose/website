@@ -1,0 +1,66 @@
+#+OPTIONS: toc:nil html-style:nil num:nil html5-fancy:1 html-postamble:nil
+
+* Recipes for awesome
+
+#+ATTR_HTML: :class meta
+27 Jan 2024
+
+This page contains recipes for the [[https://awesomewm.org/][awesome]] window manager.
+
+* Quake
+
+This recipe a implements a dropdown Quake style view of windows.
+You can attach and detach windows from the view dynamically.
+
+It works like this:
+1. To attach a window you focus on it and press ~Mod + Shift + `~
+2. Then to show/hide the window you press ~Mod + `~
+3. To detach the window focus on it and press ~Mod + Shift + `~ or attach
+   another window
+
+** Install
+
+Download the code [[https://hyperimpose.org/blog/2024-01-27_awesome/quake.lua][quake.lua]] and place it somewhere in your awesome config
+directory.
+For this example we will save it in: ~~/.config/awesome/drastik/quake.lua~
+
+After downloading import the module in your ~rc.lua~
+#+BEGIN_SRC lua
+  local quake = require("drastik.quake")
+#+END_SRC
+
+Then intialize and configure it. A complete table of all the
+configuration options can be found below.
+#+BEGIN_SRC lua
+  local quake = quake({ height = 0.45 })
+#+END_SRC
+
+At last, insert the following in the configuration section of your ~rc.lua~:
+#+BEGIN_SRC lua
+    awful.util.table.join(
+        ...
+
+        -- Quake-like dropdown program/terminal
+        awful.key({modkey, },        "`", function () quake:toggle() end),
+        awful.key({modkey, "Shift"}, "`", function () quake:use_focused() end),
+
+        ...
+    )
+#+END_SRC
+
+Now restart awesome (with ~Mod + Control + r~) and everything should work.
+
+** Known issues
+*Restarting awesome when a window is attached will cause the window to
+detach.* This happens because when awesome restarts we no longer know
+which window was attached.
+
+To fix this we could save the pid of the client somewhere in /tmp and
+read it when awesome emits the startup signal. Because I am not
+interested in this feature, I did not implement it. If you really want
+it, then send me an email and I might try to get it to work.
+
+** License
+This recipe is based on the quake utility from this project: https://github.com/lcpz/lain
+
+License: [[https://www.gnu.org/licenses/old-licenses/gpl-2.0.html][GPLv2]]

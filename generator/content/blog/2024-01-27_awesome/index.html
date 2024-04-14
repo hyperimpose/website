@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-01-27 Sat 23:19 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+</head>
+<body>
+<div id="content" class="content">
+
+<div id="outline-container-orgaab7595" class="outline-2">
+<h2 id="orgaab7595">Recipes for awesome</h2>
+<div class="outline-text-2" id="text-orgaab7595">
+<p class="meta">
+27 Jan 2024
+</p>
+
+<p>
+This page contains recipes for the <a href="https://awesomewm.org/">awesome</a> window manager.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org93651b4" class="outline-2">
+<h2 id="org93651b4">Quake</h2>
+<div class="outline-text-2" id="text-org93651b4">
+<p>
+This recipe a implements a dropdown Quake style view of windows.
+You can attach and detach windows from the view dynamically.
+</p>
+
+<p>
+It works like this:
+</p>
+<ol class="org-ol">
+<li>To attach a window you focus on it and press <code>Mod + Shift + `</code></li>
+<li>Then to show/hide the window you press <code>Mod + `</code></li>
+<li>To detach the window focus on it and press <code>Mod + Shift + `</code> or attach
+another window</li>
+</ol>
+</div>
+
+<div id="outline-container-org0840ce9" class="outline-3">
+<h3 id="org0840ce9">Install</h3>
+<div class="outline-text-3" id="text-org0840ce9">
+<p>
+Download the code <a href="https://hyperimpose.org/blog/2024-01-27_awesome/quake.lua">quake.lua</a> and place it somewhere in your awesome config
+directory.
+For this example we will save it in: <code>~/.config/awesome/drastik/quake.lua</code>
+</p>
+
+<p>
+After downloading import the module in your <code>rc.lua</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-lua"><span style="color: #ee8300;">local</span> <span style="color: #ecd795;">quake</span> = <span style="color: #dead09;">require</span><span style="color: #8c8c8c;">(</span><span style="color: #79b1db;">"drastik.quake"</span><span style="color: #8c8c8c;">)</span>
+</pre>
+</div>
+
+<p>
+Then intialize and configure it. A complete table of all the
+configuration options can be found below.
+</p>
+<div class="org-src-container">
+<pre class="src src-lua"><span style="color: #ee8300;">local</span> <span style="color: #ecd795;">quake</span> = quake<span style="color: #8c8c8c;">(</span><span style="color: #93a8c6;">{</span> height = 0.45 <span style="color: #93a8c6;">}</span><span style="color: #8c8c8c;">)</span>
+</pre>
+</div>
+
+<p>
+At last, insert the following in the configuration section of your <code>rc.lua</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-lua">awful.util.table.join<span style="color: #8c8c8c;">(</span>
+    ...
+
+    <span style="color: #8acc8a;">-- </span><span style="color: #8acc8a;">Quake-like dropdown program/terminal</span>
+    awful.key<span style="color: #93a8c6;">(</span><span style="color: #b0b1a3;">{</span>modkey, <span style="color: #b0b1a3;">}</span>,        <span style="color: #79b1db;">"`"</span>, <span style="color: #ee8300;">function</span> <span style="color: #b0b1a3;">()</span> quake:toggle<span style="color: #b0b1a3;">()</span> <span style="color: #ee8300;">end</span><span style="color: #93a8c6;">)</span>,
+    awful.key<span style="color: #93a8c6;">(</span><span style="color: #b0b1a3;">{</span>modkey, <span style="color: #79b1db;">"Shift"</span><span style="color: #b0b1a3;">}</span>, <span style="color: #79b1db;">"`"</span>, <span style="color: #ee8300;">function</span> <span style="color: #b0b1a3;">()</span> quake:use_focused<span style="color: #b0b1a3;">()</span> <span style="color: #ee8300;">end</span><span style="color: #93a8c6;">)</span>,
+
+    ...
+<span style="color: #8c8c8c;">)</span>
+</pre>
+</div>
+
+<p>
+Now restart awesome (with <code>Mod + Control + r</code>) and everything should work.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge2fa53d" class="outline-3">
+<h3 id="orge2fa53d">Known issues</h3>
+<div class="outline-text-3" id="text-orge2fa53d">
+<p>
+<b>Restarting awesome when a window is attached will cause the window to
+detach.</b> This happens because when awesome restarts we no longer know
+which window was attached.
+</p>
+
+<p>
+To fix this we could save the pid of the client somewhere in /tmp and
+read it when awesome emits the startup signal. Because I am not
+interested in this feature, I did not implement it. If you really want
+it, then send me an email and I might try to get it to work.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga2c5c67" class="outline-3">
+<h3 id="orga2c5c67">License</h3>
+<div class="outline-text-3" id="text-orga2c5c67">
+<p>
+This recipe is based on the quake utility from this project: <a href="https://github.com/lcpz/lain">https://github.com/lcpz/lain</a>
+</p>
+
+<p>
+License: <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GPLv2</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+#+OPTIONS: toc:nil html-style:nil num:nil html5-fancy:1
+
+* Website recommendations
+
+Here is list of various websites I consider interesting and worth looking at. These
+websites are owned and managed by people unrelated to me and their opinions do not
+necessarily reflect my own.
+
+[[http://verisimilitudes.net]] - A blog with articles about computing, programming and other topics.

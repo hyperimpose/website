@@ -1,0 +1,10 @@
+{% extends "layout.jinja" %}
+{% block title %}{{ title }} - {{ super() }}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/blog.css"/>
+{% endblock %}
+
+{% block content %}
+    {{ content }}
+{% endblock %}

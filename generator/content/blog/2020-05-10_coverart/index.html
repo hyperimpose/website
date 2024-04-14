@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-01-27 Sat 23:19 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+</head>
+<body>
+<div id="content" class="content">
+
+<div id="outline-container-orgc005825" class="outline-2">
+<h2 id="orgc005825">Downloading music coverart</h2>
+<div class="outline-text-2" id="text-orgc005825">
+<p class="meta">
+10 May 2020
+</p>
+
+<p>
+Cover art has always been an important part of music. It is the way
+physical media is separated and recognized. Erven in today's digital
+world releases maintain a vast aesthetic and artistic connection to
+their cover art. From streaming apps to online web stores music is
+"visualized" using cover art.
+</p>
+
+<p>
+In this article we will look at the implementation of a small library
+of mine written in Racket and discuss the differences between the
+various APIs used.
+</p>
+
+<p>
+The APIs currently used are provided by <a href="https://www.apple.com/itunes/">iTunes</a>, <a href="https://www.last.fm/">Last.fm</a>, <a href="https://www.deezer.com/">deezer</a> and
+the Internet Archive - MusicBrainz collaboration service: <a href="https://coverartarchive.org/">Cover Art Archive</a>.
+</p>
+
+<p>
+<a href="https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/">iTunes Search API</a> - This API returns 2 cover art URLs (sized 60x60 and
+100x100). We can edit the URLs and get a cover art of any arbitrary
+size. There are also arguments for specifying the number of results
+needed and the explicitness of the results. This is a very powerful
+API and can be used for any kind of medium available in the iTunes
+store.
+</p>
+
+<p>
+The library is using the following settings:
+<code>?term={TERM}&amp;limit={LIMIT}&amp;explicit={EXPLICIT}&amp;media=music&amp;entity=album</code>
+and provides the following functions:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #8c8c8c;">(</span><span style="color: #ee8300;">define</span> <span style="color: #93a8c6;">(</span><span style="color: #f7c527;">coverart:itunes</span> term
+                         <span style="color: #dead09;">#:size</span> <span style="color: #b0b1a3;">[</span>size 100<span style="color: #b0b1a3;">]</span>
+                         <span style="color: #dead09;">#:limit</span> <span style="color: #b0b1a3;">[</span>limit 1<span style="color: #b0b1a3;">]</span>
+                         <span style="color: #dead09;">#:explicit</span> <span style="color: #b0b1a3;">[</span>explicit #t<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)</span> ...<span style="color: #8c8c8c;">)</span>
+</pre>
+</div>
+
+<p>
+This function searches iTunes for music albums and returns a list of URLs.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #8c8c8c;">(</span><span style="color: #ee8300;">define</span> <span style="color: #93a8c6;">(</span><span style="color: #f7c527;">coverart:itunes:simple</span> artist
+                                release
+                                <span style="color: #dead09;">#:size</span> <span style="color: #b0b1a3;">[</span>size 100<span style="color: #b0b1a3;">]</span>
+                                <span style="color: #dead09;">#:limit</span> <span style="color: #b0b1a3;">[</span>limit 1<span style="color: #b0b1a3;">]</span>
+                                <span style="color: #dead09;">#:explicit</span> <span style="color: #b0b1a3;">[</span>explicit #t<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)</span> ...<span style="color: #8c8c8c;">)</span>
+</pre>
+</div>
+
+<p>
+This one is a wrapper function. It calls coverart:itunes with a
+properly formatted `term' based on the `artist' and `release'
+arguments.
+</p>
+
+<p>
+<a href="https://www.last.fm/api/">Last.fm API</a> - This API requires an <b>API Key</b> in order to respond. For
+the library's purposes the <a href="https://www.last.fm/api/show/album.getInfo">album.getInfo</a> method is used. The URLs
+returned can have either of the following size field formats: <i>Ys</i> or
+<i>YxY</i> where Y is the resolution of the image. Editing the URL to
+request a specific resolution results in an image whose resolution is
+&gt;= Y. Using the format <i>YxY</i> usually produces a wider range of
+results. Only one result is returned.
+</p>
+
+<p>
+The following function is provided by the library and returns a string:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #8c8c8c;">(</span><span style="color: #ee8300;">define</span> <span style="color: #93a8c6;">(</span><span style="color: #f7c527;">coverart:lastfm</span> artist
+                         release
+                         <span style="color: #dead09;">#:size</span> <span style="color: #b0b1a3;">[</span>size 300<span style="color: #b0b1a3;">]</span>
+                         <span style="color: #dead09;">#:autocorrect</span> <span style="color: #b0b1a3;">[</span>autocorrect #t<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)</span> ...<span style="color: #8c8c8c;">)</span>
+</pre>
+</div>
+
+<p>
+<a href="https://developers.deezer.com/api">deezer API</a> - [You need to login to view the documentation] - Does NOT
+need an API key to use - This API returns 4 covert art URLs. The sizes
+are 56x56, 250x250, 500x500, 1000x1000. This service also allows
+editing the URL to get an image of any arbitrary resolution. Multiple
+results are returned and the number of results can be configured.
+</p>
+
+<p>
+Here is the API URL used by the library:
+<code>http://api.deezer.com/search/album?q={QUERY}&amp;nb_items={LIMIT}&amp;output=json</code>. Where
+<code>{QUERY}</code> is the term you want to search for and <code>{LIMIT}</code> is the
+number of results you want returned.
+</p>
+
+<p>
+The two functions provided by the library are:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #8c8c8c;">(</span><span style="color: #ee8300;">define</span> <span style="color: #93a8c6;">(</span><span style="color: #f7c527;">coverart:deezer</span> query
+                         <span style="color: #dead09;">#:size</span> <span style="color: #b0b1a3;">[</span>size 1000<span style="color: #b0b1a3;">]</span>
+                         <span style="color: #dead09;">#:limit</span> <span style="color: #b0b1a3;">[</span>limit 1<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)</span> ...<span style="color: #8c8c8c;">)</span>
+</pre>
+</div>
+
+<p>
+This function searches deezer for cover art URLs and returns a list of them.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #8c8c8c;">(</span><span style="color: #ee8300;">define</span> <span style="color: #93a8c6;">(</span><span style="color: #f7c527;">coverart:deezer:simple</span> artist
+                                release
+                                <span style="color: #dead09;">#:size</span> <span style="color: #b0b1a3;">[</span>size 1000<span style="color: #b0b1a3;">]</span>
+                                <span style="color: #dead09;">#:limit</span> <span style="color: #b0b1a3;">[</span>limit 1<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)</span> ...<span style="color: #8c8c8c;">)</span>
+</pre>
+</div>
+
+<p>
+This is a wrapper function that calls coverart:deezer with the `query'
+argument formatted using the `artist' and `release'.
+</p>
+
+<p>
+<a href="https://wiki.musicbrainz.org/Cover_Art_Archive/API">Cover Art Archive API</a> - This is a very interesting service. It can
+return both the front and rear side of a medium's cover art and any
+accompanying booklets. There is one original image (of variable
+resolution) and three thumbnails (sized 250px, 500px and 1200px)
+available. The API requires a MusicBrainz ID to find and return a
+release's cover art.
+</p>
+
+<p>
+This library provides three functions. One for searching MusicBrainz
+and getting an ID, one for searching Cover Art Archive and returning
+images and one that combines the previous two.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #8c8c8c;">(</span><span style="color: #ee8300;">define</span> <span style="color: #93a8c6;">(</span><span style="color: #f7c527;">musicbrainz:get-mbid</span> query
+                              <span style="color: #dead09;">#:group-limit</span> <span style="color: #b0b1a3;">[</span>group-limit 1<span style="color: #b0b1a3;">]</span>
+                              <span style="color: #dead09;">#:rel-limit</span> <span style="color: #b0b1a3;">[</span>rel-limit 1<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)</span>
+</pre>
+</div>
+
+<p>
+This function searches MusicBrainz for IDs related to the `query'
+provided. The API organizes IDs in release groups. Each release group
+refers to a different album/EP/etc. Each group can have multiple
+releases. Each release has its own mbid. `#:group-limit' allows you to
+specify the maximum amount of release groups to return. `#:rel-limit'
+specifies the maximum number of releases included per release
+group. The function returns a list of lists of strings. The returned
+list contains one list for every release group. Each release group
+list contains strings of mbids to specific releases.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #8c8c8c;">(</span><span style="color: #ee8300;">define</span> <span style="color: #93a8c6;">(</span><span style="color: #f7c527;">coverartarchive:get-cover-url</span> mbid
+                                       <span style="color: #dead09;">#:type</span> <span style="color: #b0b1a3;">[</span>type 'front<span style="color: #b0b1a3;">]</span>
+                                       <span style="color: #dead09;">#:thumb</span> <span style="color: #b0b1a3;">[</span>thumb #f<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)</span>
+</pre>
+</div>
+
+<p>
+Returns a list of cover art image URLs. `#:type' can be 'front to get
+the front part of the cover art, 'back to get the rear part, 'medium
+to get an image of the medium itself, 'booklet for images of the
+booklet included with the release or 'all to get all the images
+returned by the response. If `#:thumb' is specified with '|250|,
+'|500| or '|1200| a thumbnail is returned instead of the original
+image.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #8c8c8c;">(</span><span style="color: #ee8300;">define</span> <span style="color: #93a8c6;">(</span><span style="color: #f7c527;">coverart:coverartarchive</span> artist
+                                  release
+                                  <span style="color: #dead09;">#:group-limit</span> <span style="color: #b0b1a3;">[</span>group-limit 1<span style="color: #b0b1a3;">]</span>
+                                  <span style="color: #dead09;">#:rel-limit</span> <span style="color: #b0b1a3;">[</span>rel-limit 1<span style="color: #b0b1a3;">]</span>
+                                  <span style="color: #dead09;">#:type</span> <span style="color: #b0b1a3;">[</span>type 'front<span style="color: #b0b1a3;">]</span>
+                                  <span style="color: #dead09;">#:thumb</span> <span style="color: #b0b1a3;">[</span>thumb #f<span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)</span>
+</pre>
+</div>
+
+<p>
+This function first calls musicbrainz:get-mbid using the `artist' and
+`release' arguments, then for every mbid returned
+coverartarchive:get-cover-url is called to get a list of URLs. It
+returns a list of lists of lists of strings. The returned list
+contains one list for every release group. Each release group list
+contains one list for every mbid. Each mbid list contains the image
+URLs related to that mbid.
+</p>
+
+<br>
+
+<p>
+In addition to those API specific functions, an additional function is
+provided to search all of the above APIs and return thumbnails to the
+cover art requested:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #8c8c8c;">(</span><span style="color: #ee8300;">define</span> <span style="color: #93a8c6;">(</span><span style="color: #f7c527;">coverart:search-thumb</span> artist
+                               album
+                               <span style="color: #dead09;">#:size</span> <span style="color: #b0b1a3;">[</span>size 500<span style="color: #b0b1a3;">]</span>
+                               <span style="color: #dead09;">#:fallback</span> <span style="color: #b0b1a3;">[</span>fallback <span style="color: #79b1db;">""</span><span style="color: #b0b1a3;">]</span><span style="color: #93a8c6;">)</span>
+</pre>
+</div>
+
+<p>
+The function will call the APIs in this order: iTunes, deezer,
+Last.fm, Cover Art Archive. The ordering is based on a service's
+ability to resize the covers. For Cover Art Archive the `#:size'
+argument is ignored and a fixed width of 500px will always be returned
+(Possible future improvement). The value of the `#:fallback' argument
+is returned if none of the services produce a result. If a result is
+found the function returns a string.
+</p>
+
+<hr>
+
+<p>
+Download the code [Racket]: <a href="https://hyperimpose.org/blog/2020-05-10_coverart/coverart.rkt">coverart.rkt</a>
+</p>
+
+<p>
+License: BSD 3-Clause
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>
