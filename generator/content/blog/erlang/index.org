@@ -12,10 +12,11 @@ decisions and encounter ever more.
 - See also: https://www.erlang.org/faq/implementations
 
 
+- [[https://rebar3.org/][Rebar3]] - The official build tool for Erlang.
 - [[https://hex.pm][Hex package manager]]
 
 ** Documentation
-- https://www.erlang.org/doc/ - Documentation for the latest version of the run-time system and all the libraries.
+- https://www.erlang.org/doc/ - Documentation for the latest version of Erlang/OTP and all the libraries.
 - [[https://www.erldocs.com/][erldocs]] - An alternative Erlang documentation
   
 ** Books, documentation, tutorials and more:
@@ -29,9 +30,7 @@ decisions and encounter ever more.
 - [[https://rosettacode.org/wiki/Category:Erlang][Rosetta Code on Erlang]] - A wiki presenting solutions to problems in many different languages
 - [[https://github.com/joearms/crypto_tutorial/][Cryptography Tutorial]] - A cryptography book with Erlang examples by Joe Armstrong
 
-
-** Tools
-- [[https://rebar3.org/][Rebar3]] - The official build tool for Erlang.
+** Other tools
 - [[http://tryerl.seriyps.ru/][Online Erlang repl]]
 - [[https://www.erldocs.com/function][erldocs function lookup]] - Find out which Erlang/OTP versions support a given function
 
