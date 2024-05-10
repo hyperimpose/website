@@ -1,0 +1,34 @@
+#+OPTIONS: toc:nil html-style:nil num:nil html5-fancy:1
+
+* Erlang
+
+This is a collection of Erlang links I've come across over time. Expect heavy modifications as I make formatting
+decisions and encounter ever more.
+
+** Implementations and tools:
+- [[https://www.erlang.org/][Erlang]] :: The standard implementation
+- [[https://github.com/atomvm/AtomVM][AtomVM]] :: Minimal VM meant to run on ESP32 SoCs, STM32 MCUs, RPi Pico, Wasm etc.
+- See also: https://www.erlang.org/faq/implementations
+
+- [[https://hex.pm][Hex package manager]]
+
+** Documentation
+- https://www.erlang.org/doc/ :: Online documentation for the latest version of the run-time system as well as all the libraries.
+- [[https://www.erldocs.com/][erldocs]] :: An alternative Erlang documentation
+  
+** Books, documentation, tutorials and more:
+- https://www.erlang.org/docs :: A collection of links to documentation, books and papers
+- https://www.erlang.org/community :: Includes learning matterial provided by the community
+- [[http://www.erlang.se/doc/programming_rules.shtml][Programming Rules and Conventions]] :: Guidelines for writing systems using Erlang. Mirrors: [[https://docs.jj1bdx.tokyo/Erlang_Programming_Rules.html][1]], [[https://web.archive.org/web/20211018191823/http://www.erlang.se/doc/programming_rules.shtml][2]]
+- [[https://learnyousomeerlang.com/content][Learn You Some Erlang for Great Good!]] :: A free online book for learning Erlang
+- [[https://rosettacode.org/wiki/Category:Erlang][Rosetta Code on Erlang]] :: A wiki presenting solutions to problems in many different languages
+- [[https://github.com/joearms/crypto_tutorial/][Cryptography Tutorial]] :: A cryptography book with Erlang examples by Joe Armstrong
+- [[https://blog.stenmans.org/theBeamBook/][The Beam Book]] :: *An advanced book describing in detail the Erlang RunTime System (ERTS)*
+
+** Tools
+- [[https://rebar3.org/][Rebar3]] :: The official build tool for Erlang.
+- [[http://tryerl.seriyps.ru/][Online Erlang repl]]
+- [[https://www.erldocs.com/function][erldocs function lookup]] :: Find out which Erlang/OTP versions support a given function
+
+** Community
+- https://www.erlang.org/community :: Includes links to the official community channels
