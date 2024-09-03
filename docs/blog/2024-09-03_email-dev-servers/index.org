@@ -1,7 +1,7 @@
 #+OPTIONS: toc:nil html-style:nil num:nil html5-fancy:1 html-postamble:nil
 #+HTML_HEAD: <style>ul { list-style-type: none; }</style>
 
-* Development Email Servers
+* Development email servers
 
 This is a collection of development email servers. Such servers can be used to develop and test
 programs that need to send outgoing email. They work by providing an SMTP server that "traps"
