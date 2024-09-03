@@ -9,7 +9,7 @@ all outgoing emails and instead of sending them to the recipient address, it pre
 in a custom inbox.
 
 The servers listed are split in two sections. In the recommended section are servers that fullfil
-the following criteria: Easy to configure, Provides docker images, Supports TLS.
+the following criteria: Easy to configure, Provide docker images, Support TLS.
 
 ** Recommended
 - [[https://github.com/rnwood/smtp4dev][smtp4dev]] - Resizable viewport, HTML validation and compatibility report, Auto self-signed cert generation.
