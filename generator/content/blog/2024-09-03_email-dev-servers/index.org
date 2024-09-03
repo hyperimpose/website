@@ -1,0 +1,21 @@
+#+OPTIONS: toc:nil html-style:nil num:nil html5-fancy:1 html-postamble:nil
+#+HTML_HEAD: <style>ul { list-style-type: none; }</style>
+
+* Development Email Servers
+
+This is a collection of development email servers. Such servers can be used to develop and test
+programs that need to send outgoing email. They work by providing an SMTP server that "traps"
+all outgoing emails and instead of sending them to the recipient address, it presents them
+in a custom inbox.
+
+The servers listed are split in two sections. In the recommended section are servers that fullfil
+the following criteria: Easy to configure, Provides docker images, Supports TLS.
+
+** Recommended
+- [[https://github.com/rnwood/smtp4dev][smtp4dev]] - Resizable viewport, HTML validation and compatibility report, Auto self-signed cert generation.
+- [[https://github.com/maildev/maildev][maildev]] - Resizable viewport, You must provide the certs yourself.
+
+** Others
+- [[https://github.com/mailslurper/mailslurper][MailSlurper]] - You must provide the certs yourself. The docker image did not run when tried.
+- [[https://github.com/mailhog/MailHog][MailHog]] - Does not seem to support TLS.
+- [[https://github.com/sj26/mailcatcher][MailCatcher]] - Does not seem to support TLS.

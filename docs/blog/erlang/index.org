@@ -3,8 +3,7 @@
 
 * Erlang
 
-This is a collection of Erlang links I've come across over time. Expect heavy modifications as I make formatting
-decisions and encounter ever more.
+This is a collection of Erlang links I've come across over time. Expect modifications as I encounter ever more.
 
 ** Implementations and tools:
 - [[https://www.erlang.org/][Erlang]] - The standard implementation
