@@ -1,0 +1,39 @@
+#+OPTIONS: toc:nil html-style:nil num:nil html5-fancy:1 html-postamble:nil
+
+* Urban Dictionary
+:PROPERTIES:
+:CUSTOM_ID: ud
+:END:
+
+#+BEGIN_EXAMPLE
+Usage:
+  ud [-lrah] [-s <select>] [--select <select>] [--list] [--id] [--random]
+     [--autocomplete] [--help] <words>...
+
+Retrieve word definitions from https://urbandictionary.org
+
+Arguments:
+  words              word(s) to search
+
+Optional arguments:
+  -s, --select       select other definitions (int)
+  -l, --list         show a list of definitions
+  --id               search by id
+  -r, --random       define a random word
+  -a, --autocomplete show possible completions
+  -h, --help         link to this help
+
+
+If no arguments are given, it will return the word of the day. You can pass a
+word or a phrase to search for its definition.
+
+The --select argument can be used to view other definitions.
+
+Examples:
+  ud
+  ud -s 2
+  ud IRC
+  ud internet -s 2
+  ud chat -l
+  ud -r
+#+END_EXAMPLE

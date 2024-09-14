@@ -77,6 +77,20 @@ def blog():
             articles=article_info))
 
 
+def drastikbot_help():
+    base = CONTENT / "drastikbot" / "help"
+    extensions = [x for x in base.iterdir() if x.is_dir()]
+
+    template = env.get_template("blog/article.jinja")
+
+    for e in extensions:
+        shutil.copytree(e, OUTPUT / "drastikbot" / "help" / e.name)
+        with open(OUTPUT / "drastikbot" / "help" / e.name / "index.html", "w") as fp:
+            fp.write(template.render(
+                title=e.name,
+                content=get_content(e / "index.html")))
+
+
 if __name__ == "__main__":
     for file in OUTPUT.glob("*"):
         if file.is_dir():
@@ -91,5 +105,11 @@ if __name__ == "__main__":
     # And every article
     blog()
 
+    # /drastikbot/help/* every help page
+    drastikbot_help()
+
     # static files
     shutil.copytree(STATIC, f"{OUTPUT}/static")
+
+    # CNAME for Github Pages
+    shutil.copyfile(CONTENT / "CNAME", OUTPUT / "CNAME")
