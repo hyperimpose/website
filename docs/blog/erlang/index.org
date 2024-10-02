@@ -14,6 +14,9 @@ This is a collection of Erlang links I've come across over time. Expect modifica
 - [[https://rebar3.org/][Rebar3]] - The official build tool for Erlang.
 - [[https://hex.pm][Hex package manager]]
 
+
+- [[https://whatsapp.github.io/erlang-language-platform/][Erlang Language Platform (ELP)]] - An LSP language server and a platform for tool developers
+
 ** Documentation
 - https://www.erlang.org/doc/ - Documentation for the latest version of Erlang/OTP and all the libraries.
 - [[https://www.erldocs.com/][erldocs]] - An alternative Erlang documentation
