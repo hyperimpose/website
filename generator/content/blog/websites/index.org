@@ -1,4 +1,4 @@
-#+OPTIONS: toc:nil html-style:nil num:nil html5-fancy:1
+#+OPTIONS: toc:nil html-style:nil num:nil html5-fancy:1 html-postamble:nil
 
 * Website recommendations
 
@@ -7,4 +7,5 @@ websites are owned and managed by people unrelated to me and their opinions do n
 necessarily reflect my own.
 
 [[http://verisimilitudes.net]] - A blog with articles about computing, programming and other topics.
+
 https://phntsm.ddns.net - Bubblegumdrop's Web Sight
