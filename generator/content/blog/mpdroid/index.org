@@ -1,0 +1,151 @@
+#+OPTIONS: toc:nil html-style:nil num:nil html5-fancy:1 html-postamble:nil ^:nil
+
+#+BEGIN_EXPORT html
+<style>
+.org-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imglist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+figure {
+  width: 350px;
+}
+
+img {
+  width: 100%;
+}
+
+figcaption {
+  color: rgba(255, 255, 255, 0.9);
+}
+</style>
+#+END_EXPORT
+
+* MPDroid Screenshots
+#+BEGIN_CENTER
+Below are screenshots from the Android app MPDroid. This is a client for the Music Player Daemon.
+Its development has stopped and it no longer runs on recent android versions. I am archiving some
+screenshots here to aid my own development of a mobile music player.
+#+END_CENTER
+
+** Files
+#+BEGIN_CENTER
+This is a list of the files in your music_directory.
+#+END_CENTER
+
+#+BEGIN_EXPORT html
+<div class="imglist">
+<figure>
+  <img src="./pics/files.png" alt="files.png">
+  <figcaption>Files 1: Base file list</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/files_menu.png" alt="files_menu.png">
+  <figcaption>Files 2: Three dot menu</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/files_context_menu.png" alt="files_context_menu.png">
+  <figcaption>Files 3: Context menu for a list item</figcaption>
+</figure>
+</div>
+#+END_EXPORT
+
+
+** Queue
+#+BEGIN_CENTER
+The queue of songs you have selected to listen to. There are two modes: tablet mode and mobile mode.
+
+When using the tablet mode in landscape (not pictured) a split screen view is used:
+On the left are the controls and covert art and on the right the list of songs.
+
+The queue list can be rearranged by dragging the cover art, at the left, of each song up or down.
+#+END_CENTER
+
+#+BEGIN_EXPORT html
+<div class="imglist">
+<figure>
+  <img src="./pics/queue.png" alt="queue.png">
+  <figcaption>Queue 1: The queue in tablet mode.</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/queue_mobile.png" alt="queue_mobile.png">
+  <figcaption>Queue 2: The queue in mobile mode. You can toggle the song list with the button on top.</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/queue_mobile_list.png" alt="queue_mobile_list.png">
+  <figcaption>Queue 3: Song context menu.</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/queue_song_context_menu_goto.png" alt="queue_song_context_menu_goto.png">
+  <figcaption>Queue 4: Song context "Go to ..." submenu. Top-left only in the screenshot.</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/queue_menu.png" alt="queue_menu.png">
+  <figcaption>Queue 5: Queue menu</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/queue_coverart_menu.png" alt="queue_coverart_menu.png">
+  <figcaption>Queue 6: Coverart menu. Shown if you press and hold.</figcaption>
+</figure>
+</div>
+#+END_EXPORT
+
+** Settings
+
+#+BEGIN_EXPORT html
+<div class="imglist">
+<figure>
+  <img src="./pics/settings.png" alt="settings.png">
+  <figcaption>Settings 1: Main settings view</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/settings_about.png" alt="settings_about.png">
+  <figcaption>Settings 2: About view</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/settings_connection.png" alt="settings_connection.png">
+  <figcaption>Settings 3: Connection settings</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/settings_connection_default.png" alt="settings_connection_default.png">
+  <figcaption>Settings 4: Default connection settings</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/settings_coverart.png" alt="settings_coverart.png">
+  <figcaption>Settings 5: Cover art settings</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/settings_library.png" alt="settings_library.png">
+  <figcaption>Settings 6: Library settings</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/settings_queue.png" alt="settings_queue.png">
+  <figcaption>Settings 7: Queue settings</figcaption>
+</figure>
+
+<figure>
+  <img src="./pics/settings_server_info.png" alt="settings_server_info.png">
+  <figcaption>Settings 8: MPD server information</figcaption>
+</figure>
+</div>
+#+END_EXPORT
