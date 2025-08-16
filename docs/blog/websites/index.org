@@ -9,3 +9,5 @@ necessarily reflect my own.
 [[http://verisimilitudes.net]] - A blog with articles about computing, programming and other topics.
 
 https://phntsm.ddns.net - Bubblegumdrop's Web Sight
+
+https://churchofturing.github.io - The intersection of rants, programming and computer Science
